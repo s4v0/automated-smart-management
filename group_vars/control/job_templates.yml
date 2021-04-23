@@ -259,8 +259,8 @@ tower_templates:
       ec2_region: us-east-1
       instances:
         tags:
-          guid: EC2_NAME_PREFIX
-          Student: STUDENT_NAME_WITH_NUM
+          guid: oe01
+          Student: student1
           short_name: node*
 
   - name: SERVER / Stop node via ec2_node_tools
@@ -273,8 +273,8 @@ tower_templates:
       ec2_region: us-east-1
       instances:
         tags:
-          guid: EC2_NAME_PREFIX
-          Student: STUDENT_NAME_WITH_NUM
+          guid: oe01
+          Student: student1
           short_name: node*
 
   - name: CONVERT2RHEL / 01 - Take node snapshot
@@ -288,8 +288,8 @@ tower_templates:
       instances:
         tags:
           short_name: node*
-          guid: EC2_NAME_PREFIX
-          Student: STUDENT_NAME_WITH_NUM
+          guid: oe01
+          Student: student1
           username: centos
 
   - name: CONVERT2RHEL / 02 - Upgrade OS to latest release
@@ -335,8 +335,8 @@ tower_templates:
       ec2_region: us-east-1
       instances:
         tags:
-          guid: EC2_NAME_PREFIX
-          Student: STUDENT_NAME_WITH_NUM
+          guid: oe01
+          Student: student1
           username: centos
 
   - name: CONVERT2RHEL / 99 - Delete snapshot
@@ -349,8 +349,8 @@ tower_templates:
       ec2_region: us-east-1
       snapshots:
         tags:
-          guid: EC2_NAME_PREFIX
-          Student: STUDENT_NAME_WITH_NUM
+          guid: oe01
+          Student: student1
 
   - name: EC2 / Set instance tags based on Satellite(Foreman) facts
     description: Set instance tags - selection via existing EC2 instance tags
@@ -363,8 +363,8 @@ tower_templates:
       ec2_region: us-east-1
       instances:
         tags:
-          guid: EC2_NAME_PREFIX
-          Student: STUDENT_NAME_WITH_NUM
+          guid: oe01
+          Student: student1
           short_name: node*
 
   - name: EC2 / Get instance details via ec2_node_tools role
@@ -378,8 +378,8 @@ tower_templates:
       ec2_region: us-east-1
       instances:
         tags:
-          guid: EC2_NAME_PREFIX
-          Student: STUDENT_NAME_WITH_NUM
+          guid: oe01
+          Student: student1
           short_name: node*
 
   - name: EC2 / Update Route53
@@ -393,9 +393,9 @@ tower_templates:
       ec2_region: us-east-1
       instances:
         tags:
-          Workshop: EC2_NAME_PREFIX
-      student: STUDENT_NAME_WITH_NUM
-      workshop_dns_zone: WORKSHOP_DNS_ZONE
+          Workshop: oe01
+      student: student1
+      workshop_dns_zone: sandbox1775.opentlc.com
 
   - name: TOWER / Update CentOS7 Dev inventories
     project: Automated Management
