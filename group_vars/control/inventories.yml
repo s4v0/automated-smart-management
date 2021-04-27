@@ -11,8 +11,8 @@ tower_inventories:
         tags:
           ContentView: CentOS7
           Environment: Dev
-          guid: oe01
-          Student: student1
+          guid: EC2_NAME_PREFIX
+          Student: STUDENT_NAME_WITH_NUM
 
   - name: CentOS7 Production
     organization: Default
@@ -22,8 +22,8 @@ tower_inventories:
         tags:
           ContentView: CentOS7
           Environment: Prod
-          guid: oe01
-          Student: student1
+          guid: EC2_NAME_PREFIX
+          Student: STUDENT_NAME_WITH_NUM
 
   - name: RHEL7 Development
     organization: Default
@@ -32,8 +32,8 @@ tower_inventories:
         tags:
           ContentView: RHEL7
           Environment: Dev
-          guid: oe01
-          Student: student1
+          guid: EC2_NAME_PREFIX
+          Student: STUDENT_NAME_WITH_NUM
 
   - name: RHEL7 Production
     organization: Default
@@ -42,8 +42,8 @@ tower_inventories:
         tags:
           ContentView: RHEL7
           Environment: Prod
-          guid: oe01
-          Student: student1
+          guid: EC2_NAME_PREFIX
+          Student: STUDENT_NAME_WITH_NUM
 
   - name: ALL Development
     organization: Default
@@ -73,8 +73,8 @@ tower_inventory_sources:
       filters:
         tag:ContentView: CentOS7
         tag:Environment: Dev
-        tag:Student: student1
-        tag:guid: oe01
+        tag:Student: STUDENT_NAME_WITH_NUM
+        tag:guid: EC2_NAME_PREFIX
       hostnames:
         - tag:NodeName
       keyed_groups:
@@ -103,8 +103,8 @@ tower_inventory_sources:
       filters:
         tag:ContentView: CentOS7
         tag:Environment: Prod
-        tag:Student: student1
-        tag:guid: oe01
+        tag:Student: STUDENT_NAME_WITH_NUM
+        tag:guid: EC2_NAME_PREFIX
       hostnames:
         - tag:NodeName
         - tag:Name
@@ -135,7 +135,7 @@ tower_inventory_sources:
       filters:
         tag:ContentView: RHEL7
         tag:Environment: Dev
-        tag:Student: student1
+        tag:Student: STUDENT_NAME_WITH_NUM
         tag:guid: EC2_NAME_PREFIX
       hostnames:
         - tag:NodeName
@@ -164,8 +164,8 @@ tower_inventory_sources:
       filters:
         tag:ContentView: RHEL7
         tag:Environment: Prod
-        tag:Student: student1
-        tag:guid: oe01
+        tag:Student: STUDENT_NAME_WITH_NUM
+        tag:guid: EC2_NAME_PREFIX
       hostnames:
         - tag:NodeName
         - tag:Name
