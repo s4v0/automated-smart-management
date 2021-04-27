@@ -5,8 +5,8 @@ regions:
 filters:
   tag:ContentView: RHEL7
   tag:Environment: Dev
-  tag:Student: student1
-  tag:guid: eo01
+  tag:Student: STUDENT_NAME_WITH_NUM
+  tag:guid: EC2_NAME_PREFIX
 hostnames:
   - tag:NodeName
 compose:
