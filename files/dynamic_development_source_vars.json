@@ -1,6 +1,6 @@
 {
     "regions": [
-       "us-east-2"
+       "us-east-1"
     ],
     "filters": {
        "tag:Environment": "Dev",
