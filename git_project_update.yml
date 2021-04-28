@@ -1,20 +1,71 @@
 ---
 - hosts: "turret"
-  become: false
+  become: true
   tasks:
+#================================
   - name: Create temporary directory
     tempfile:
       state: directory
     register: tmpdir
-
+#================================
   - name: Git checkout
     ansible.builtin.git:
       repo: "{{ git_repo_url }}"
       dest: "{{ tmpdir.path }}"
       version: "{{ git_repo_branch | default('main') }}"
-
+#================================
   - debug:
       msg:
         - "Temporary directory path  ==> {{ tmpdir.path }}"
+#================================
+  - name: list temporary directory contents
+    find:
+      paths: "{{ tmpdir.path }}"
+      patterns: "*"
+      recurse: no
+      file_type: directory
+    register: found_directories
 
+  - debug:
+      msg: "{{ [item.path] }} "
+    with_items: "{{ found_directories.files }}"
+#================================
+  - name: "Git: is it up-to-date?"
+    ansible.builtin.git:
+      repo: git@ssh.dev.azure.com:v3/network-projects
+      dest: "{{ tmpdir.path }}"
+      update: yes
+      version: "{{ git_repo_branch | default('main') }}"
+    register: git
+    ignore_errors: True
+  - debug:
+      var: git
+#================================
+  - name: Git - Adding
+    shell: "git add *"
+    args:
+      chdir: "{{ tmpdir.path }}"
+    register: gitadd
+    when: git.msg is defined
+  - debug:
+      var: gitadd.cmd
+#================================
+  - name: Git - commiting
+    shell: git commit -m "Ansible Backup" 
+    args:
+      chdir: "{{ tmpdir.path }}"
+    register: gitcommit
+    when: git.msg is defined
+  - debug:
+      var: gitcommit.stdout
+#================================  
+  - name: Git - push
+    shell: git push 
+    args:
+      chdir: "{{ tmpdir.path }}"
+    register: gitpush
+    when: git.msg is defined
+  - debug:
+      var: gitpush
+#================================
   run_once: yes
