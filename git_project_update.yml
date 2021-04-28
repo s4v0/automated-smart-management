@@ -1,0 +1,20 @@
+---
+- hosts: "turret"
+  become: false
+  tasks:
+  - name: Create temporary directory
+    tempfile:
+      state: directory
+    register: tmpdir
+
+  - name: Git checkout
+    ansible.builtin.git:
+      repo: "{{ git_repo_url }}"
+      dest: "{{ tmpdir.path }}"
+      version: "{{ git_repo_branch | default('main') }}"
+
+  - debug:
+      msg:
+        - "Temporary directory path  ==> {{ tmpdir.path }}"
+
+  run_once: yes
