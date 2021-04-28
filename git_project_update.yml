@@ -8,11 +8,12 @@
       state: directory
     register: tmpdir
 #================================
-  - name: Git checkout
-    ansible.builtin.git:
-      repo: "{{ git_repo_url }}"
-      dest: "{{ tmpdir.path }}"
-      version: "{{ git_repo_branch | default('main') }}"
+  - name: Git clone project locally
+    ansible-git:
+      git_url: "{{ git_repo_url }}"
+      git_token: "{{ lookup('env', 'MY_PA_TOKEN') }}"
+      git_branch: "{{ git_repo_branch | default('main') }}"
+      base_working_dir: "{{ tmpdir.path }}"
 #================================
   - debug:
       msg:
@@ -32,7 +33,7 @@
 #================================
   - name: "Git: is it up-to-date?"
     ansible.builtin.git:
-      repo: git@ssh.dev.azure.com:v3/network-projects
+      repo: "{{ git_repo_url }}"
       dest: "{{ tmpdir.path }}"
       update: yes
       version: "{{ git_repo_branch | default('main') }}"
