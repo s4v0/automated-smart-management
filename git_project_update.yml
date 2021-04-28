@@ -9,7 +9,7 @@
     register: tmpdir
 #================================
   - name: Git clone project locally
-    ansible-git:
+    ansible_git:
       git_url: "{{ git_repo_url }}"
       git_token: "{{ lookup('env', 'MY_PA_TOKEN') }}"
       git_branch: "{{ git_repo_branch | default('main') }}"
