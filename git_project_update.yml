@@ -10,7 +10,7 @@
 #================================
   - name: Git clone project locally
     include_role:
-      name: ansible-git
+      name: ansible_git
       tasks_from: clone
     vars:
       git_url: "{{ git_repo_url }}"
