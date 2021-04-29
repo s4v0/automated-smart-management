@@ -3,7 +3,7 @@
   become: true
   vars:
     # outside of yaml, actual regex looks like this ==> (?!.*\/).+
-    git_repo_path: >-
+    git_repo_path: |
       {{ git_url | regex_search('(?!.*\/).+') | regex_replace('.git', '') }}
   tasks:
 #================================
