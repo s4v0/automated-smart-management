@@ -54,8 +54,35 @@
   - debug:
       msg: "{{ item }} "
     with_items: "{{ files_to_change.results | sum(attribute='files', start=[]) | map(attribute='path') | list }}"
-  #- debug:
-  #    msg: "{{ item }} "
-  #  with_items: "{{ files_to_change.results | selectattr('files', 'defined') | map(attribute='path') }}"
 #================================
+  - name: Replace EC2_NAME_PREFIX in files
+    replace:
+      dest: "{{ item }}"
+      regexp: "EC2_NAME_PREFIX"
+      replace: "{{ EC2_NAME_PREFIX }}"
+    with_items: "{{ files_to_change.results | sum(attribute='files', start=[]) | map(attribute='path') | list }}"
+
+  - name: Replace STUDENT_NAME_WITH_NUM in files
+    replace:
+      dest: "{{ item }}"
+      regexp: "STUDENT_NAME_WITH_NUM"
+      replace: "{{ STUDENT_NAME_WITH_NUM }}"
+    with_items: "{{ files_to_change.results | sum(attribute='files', start=[]) | map(attribute='path') | list }}"
+
+  - name: Replace WRKSHP_DNS_ZONE in files
+    replace:
+      dest: "{{ item }}"
+      regexp: "WRKSHP_DNS_ZONE"
+      replace: "{{ WRKSHP_DNS_ZONE }}"
+    with_items: "{{ files_to_change.results | sum(attribute='files', start=[]) | map(attribute='path') | list }}"
+
+  - name: Replace us-east-1 in files
+    replace:
+      dest: "{{ item }}"
+      regexp: "WRKSHP_DNS_ZONE"
+      replace: "{{ WRKSHP_DNS_ZONE }}"
+    with_items: "{{ files_to_change.results | sum(attribute='files', start=[]) | map(attribute='path') | list }}"
+    when: ec2_region != "us-east-1"
+#================================
+
   run_once: yes
