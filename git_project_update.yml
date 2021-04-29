@@ -84,5 +84,14 @@
     with_items: "{{ files_to_change.results | sum(attribute='files', start=[]) | map(attribute='path') | list }}"
     when: ec2_region != "us-east-1"
 #================================
-
+  - name: Git commit and push changes back to upstream
+    include_role:
+      name: ansible_git
+      tasks_from: push
+    vars:
+      git_url: "{{ git_repo_url }}"
+      git_token: "{{ lookup('env', 'MY_PA_TOKEN') }}"
+      git_branch: "{{ git_repo_branch | default('main') }}"
+      base_working_dir: "{{ tmpdir.path }}"
+#================================
   run_once: yes
