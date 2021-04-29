@@ -79,8 +79,8 @@
   - name: Replace us-east-1 in files
     replace:
       dest: "{{ item }}"
-      regexp: "WRKSHP_DNS_ZONE"
-      replace: "{{ WRKSHP_DNS_ZONE }}"
+      regexp: "us-east-1"
+      replace: "{{ ec2_region }}"
     with_items: "{{ files_to_change.results | sum(attribute='files', start=[]) | map(attribute='path') | list }}"
     when: ec2_region != "us-east-1"
 #================================
