@@ -1,11 +1,14 @@
 ---
 - hosts: "turret"
-  become: true
+  become: false
   vars:
     # outside of yaml, actual regex looks like this ==> (?!.*\/).+
-    git_repo_path: >
-      {{ git_repo_url | regex_search('(?!.*\/).+') | regex_replace('.git', '') | replace('\n', '') }}
+    git_repo_path_pretrim: >
+      {{ git_repo_url | regex_search('(?!.*\/).+') | regex_replace('.git', '') }}
   tasks:
+#================================
+  - set_fact:
+      git_repo_path: "{{ git_repo_path_pretrim | trim }}"
 #================================
   - name: Create temporary directory
     tempfile:
@@ -25,11 +28,11 @@
   - debug:
       msg:
         - "Temporary directory path  ==> {{ tmpdir.path }}"
-        - "git_repo_path ==> {{ git_repo_path | trim }}"
+        - "git_repo_path ==> {{ git_repo_path }}"
 #================================
   - name: list temporary directory contents
     find:
-      paths: "{{ tmpdir.path }}/{{ git_repo_path | trim }}"
+      paths: "{{ tmpdir.path }}/{{ git_repo_path }}"
       patterns: "*"
       recurse: no
       file_type: directory
