@@ -25,11 +25,11 @@
   - debug:
       msg:
         - "Temporary directory path  ==> {{ tmpdir.path }}"
-        - "git_repo_path ==> {{ git_repo_path }}"
+        - "git_repo_path ==> {{ git_repo_path | trim }}"
 #================================
   - name: list temporary directory contents
     find:
-      paths: "{{ tmpdir.path }}/{{ git_repo_path }}"
+      paths: "{{ tmpdir.path }}/{{ git_repo_path | trim }}"
       patterns: "*"
       recurse: no
       file_type: directory
