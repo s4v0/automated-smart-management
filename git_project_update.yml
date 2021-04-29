@@ -34,6 +34,7 @@
     find:
       paths: "{{ tmpdir.path }}/{{ git_repo_path }}"
       patterns: "*"
+      excludes: 'collections'
       recurse: no
       file_type: directory
     register: found_directories
