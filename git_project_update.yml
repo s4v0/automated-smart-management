@@ -3,7 +3,9 @@
   become: true
   tasks:
   vars:
-    git_repo_path: "{{ git_url | regex_search('(?!.*\/).+') | regex_replace('.git', '') }}"
+    # outside of yaml, actual regex looks like this ==> (?!.*\/).+
+    git_repo_path: >
+       {{ git_url | regex_search('(?!.*\/).+') | regex_replace('.git', '') }}
 #================================
   - name: Create temporary directory
     tempfile:
