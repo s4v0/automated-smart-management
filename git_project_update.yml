@@ -55,7 +55,7 @@
   #    msg: "{{ [item.files] }} "
   #  with_items: "{{ files_to_change.results  }}"
   - debug:
-      msg: "{{ [item] }} "
+      msg: "{{ [item.path] }} "
     with_items: "{{ files_to_change.results | selectattr('files', 'defined') | list }}"
 #================================
   run_once: yes
