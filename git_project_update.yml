@@ -4,7 +4,7 @@
   vars:
     # outside of yaml, actual regex looks like this ==> (?!.*\/).+
     git_repo_path: >
-      {{ git_repo_url | regex_search('(?!.*\/).+') | regex_replace('.git', '') | replace('\n', '') }}
+      {{ git_repo_url | regex_search('(?!.*\/).+') | regex_replace('.git', '') | to_json | from_json | replace('\n', '') }}
   tasks:
 #================================
   - name: Create temporary directory
