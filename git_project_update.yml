@@ -55,7 +55,7 @@
   #    msg: "{{ [item.path] }} "
   #  with_items: "{{ files_to_change.files }}"
   - debug:
-      msg: "{{ [item.path] }} "
-    with_items: "{{ files_to_change.files }}"
+      msg: "{{ [item.files] }} "
+    with_items: "{{ files_to_change.results }}"
 #================================
   run_once: yes
