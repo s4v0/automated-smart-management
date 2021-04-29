@@ -2,6 +2,8 @@
 - hosts: "turret"
   become: true
   tasks:
+  vars:
+    git_repo_path: "{{ git_url | regex_search('(?!.*\/).+') | regex_replace('.git', '') }}"
 #================================
   - name: Create temporary directory
     tempfile:
@@ -24,7 +26,7 @@
 #================================
   - name: list temporary directory contents
     find:
-      paths: "{{ tmpdir.path }}"
+      paths: "{{ tmpdir.path }}/{{ git_repo_path }}"
       patterns: "*"
       recurse: no
       file_type: directory
@@ -34,5 +36,4 @@
       msg: "{{ [item.path] }} "
     with_items: "{{ found_directories.files }}"
 #================================
-
   run_once: yes
