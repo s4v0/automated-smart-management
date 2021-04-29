@@ -25,6 +25,7 @@
   - debug:
       msg:
         - "Temporary directory path  ==> {{ tmpdir.path }}"
+        - "git_repo_path ==> {{ git_repo_path }}"
 #================================
   - name: list temporary directory contents
     find:
