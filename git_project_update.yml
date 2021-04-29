@@ -34,7 +34,7 @@
     find:
       paths: "{{ tmpdir.path }}/{{ git_repo_path }}"
       patterns: "*"
-      excludes: 'collections'
+      excludes: 'collections,roles'
       recurse: no
       file_type: directory
     register: found_directories
@@ -42,5 +42,17 @@
   - debug:
       msg: "{{ [item.path] }} "
     with_items: "{{ found_directories.files }}"
+#================================
+  - name: Recursively select yml files
+    find:
+      paths: "{{ [item.path] }}"
+      patterns: '*.yml'
+      recurse: yes
+    with_items: "{{ found_directories.files }}"
+    register: files_to_change
+
+  - debug:
+      msg: "{{ [item.path] }} "
+    with_items: "{{ files_to_change.files }}"
 #================================
   run_once: yes
