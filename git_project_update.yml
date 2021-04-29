@@ -1,11 +1,10 @@
 ---
 - hosts: "turret"
   become: true
-  tasks:
   vars:
     # outside of yaml, actual regex looks like this ==> (?!.*\/).+
-    git_repo_path: >
-       {{ git_url | regex_search('(?!.*\/).+') | regex_replace('.git', '') }}
+    git_repo_path: "{{ git_url | regex_search('(?!.*\/).+') | regex_replace('.git', '') }}"
+  tasks:
 #================================
   - name: Create temporary directory
     tempfile:
